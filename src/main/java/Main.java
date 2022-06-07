@@ -18,6 +18,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+
 import java.util.List;
 
 public class Main {
@@ -82,25 +83,25 @@ public class Main {
         List<Employee> staff = new ArrayList<>();
         try {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newDefaultInstance();
-            DocumentBuilder documentBuilder = factory.newDocumentBuilder();
-            Document doc = documentBuilder.parse(new File(fileName));
-            Node root = doc.getDocumentElement();
-            NodeList nodeList = root.getChildNodes();
-            for (int i = 0; i < nodeList.getLength(); i++) {
-                Node node = nodeList.item(i);
-                if (node.ELEMENT_NODE == node.getNodeType()) {
-                    Employee employee = new Employee();
-                    NodeList nodeList1 = node.getChildNodes();
-                    for (int x = 0; x < nodeList1.getLength(); x++) {
-                        Node child = nodeList1.item(x);
-                        if (child.getNodeName().equals("id")) employee.id = Long.parseLong(child.getTextContent());
-                        if (child.getNodeName().equals("firstName")) employee.firstName = child.getTextContent();
-                        if (child.getNodeName().equals("lastName")) employee.lastName = child.getTextContent();
-                        if (child.getNodeName().equals("country")) employee.country = child.getTextContent();
-                        if (child.getNodeName().equals("age")) employee.age = Integer.parseInt(child.getTextContent());
-                    }
-                    staff.add(employee);
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            Document doc = builder.parse(new File(fileName));
+
+            NodeList staffNodeList = doc.getElementsByTagName("employee");
+            for (int i = 0; i < staffNodeList.getLength(); i++) {
+                Employee employee = new Employee();
+                NodeList nodeList1 = staffNodeList.item(i).getChildNodes();
+
+                for (int x = 0; x < nodeList1.getLength(); x++) {
+                    Node child = nodeList1.item(x);
+
+                    if (child.getNodeName().equals("id")) employee.id = child.getTextContent();
+                    if (child.getNodeName().equals("firstName")) employee.firstName = child.getTextContent();
+                    if (child.getNodeName().equals("lastName")) employee.lastName = child.getTextContent();
+                    if (child.getNodeName().equals("country")) employee.country = child.getTextContent();
+                    if (child.getNodeName().equals("age")) employee.age = child.getTextContent();
+
                 }
+                staff.add(employee);
             }
         } catch (ParserConfigurationException | IOException | SAXException e) {
             throw new RuntimeException(e);
