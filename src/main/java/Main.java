@@ -90,9 +90,14 @@ public class Main {
             for (int i = 0; i < staffNodeList.getLength(); i++) {
                 Employee employee = new Employee();
                 NodeList nodeList1 = staffNodeList.item(i).getChildNodes();
-
                 for (int x = 0; x < nodeList1.getLength(); x++) {
                     Node child = nodeList1.item(x);
+//                    Element child2 = (Element) child;
+//                    employee.id = child2.getElementsByTagName("firstName").item(x).getTextContent();
+//                    employee.firstName = child2.getElementsByTagName("firstName").item(x).getTextContent();
+//                    employee.lastName = child2.getElementsByTagName("firstName").item(x).getTextContent();
+//                    employee.country = child2.getElementsByTagName("firstName").item(x).getTextContent();
+//                    employee.age = child2.getElementsByTagName("firstName").item(x).getTextContent();
 
                     if (child.getNodeName().equals("id")) employee.id = child.getTextContent();
                     if (child.getNodeName().equals("firstName")) employee.firstName = child.getTextContent();
@@ -107,5 +112,6 @@ public class Main {
             throw new RuntimeException(e);
         }
         return staff;
+
     }
 }
