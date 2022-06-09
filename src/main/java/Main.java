@@ -92,19 +92,29 @@ public class Main {
                 NodeList nodeList1 = staffNodeList.item(i).getChildNodes();
                 for (int x = 0; x < nodeList1.getLength(); x++) {
                     Node child = nodeList1.item(x);
-//                    Element child2 = (Element) child;
-//                    employee.id = child2.getElementsByTagName("firstName").item(x).getTextContent();
-//                    employee.firstName = child2.getElementsByTagName("firstName").item(x).getTextContent();
-//                    employee.lastName = child2.getElementsByTagName("firstName").item(x).getTextContent();
-//                    employee.country = child2.getElementsByTagName("firstName").item(x).getTextContent();
-//                    employee.age = child2.getElementsByTagName("firstName").item(x).getTextContent();
+                    switch (child.getNodeName()) {
+                        case "id": {
+                            employee.id = child.getTextContent();
+                        }
+                        break;
+                        case "firstName": {
+                            employee.firstName = child.getTextContent();
+                        }
+                        break;
+                        case "lastName": {
+                            employee.lastName = child.getTextContent();
+                        }
+                        break;
+                        case "country": {
+                            employee.country = child.getTextContent();
+                        }
+                        break;
+                        case "age": {
+                            employee.age = child.getTextContent();
+                        }
+                        break;
 
-                    if (child.getNodeName().equals("id")) employee.id = child.getTextContent();
-                    if (child.getNodeName().equals("firstName")) employee.firstName = child.getTextContent();
-                    if (child.getNodeName().equals("lastName")) employee.lastName = child.getTextContent();
-                    if (child.getNodeName().equals("country")) employee.country = child.getTextContent();
-                    if (child.getNodeName().equals("age")) employee.age = child.getTextContent();
-
+                    }
                 }
                 staff.add(employee);
             }
